@@ -2121,6 +2121,9 @@ public class GNUCPPSourceParser extends AbstractGNUSourceCodeParser {
 		if (LT(1) == IToken.tELLIPSIS) {
 			result.setIsPackExpansion(true);
 			return setRange(result, offset, consume().getEndOffset());
+		} else if (LT(1) == IToken.tASSIGN) {
+			consume();
+			expression(ExprKind.eAssignment, BinaryExprCtx.eNotInTemplateID, null, null);
 		}
 
 		return setRange(result, offset, calculateEndOffset(identifier));
